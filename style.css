@@ -70,3 +70,21 @@ button:hover {
   margin-top: 4px;
   display: block;
 }
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 6px;
+  width: 100%;
+  background: #ccc;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.strength-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #555;
+}
