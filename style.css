@@ -43,3 +43,30 @@ button:hover {
   color: red;
   margin-top: 15px;
 }
+.form-control {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.form-control input {
+  border: 2px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.form-control.success input {
+  border-color: #2ecc71;
+}
+
+.form-control.error input {
+  border-color: #e74c3c;
+}
+
+.form-control .error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
