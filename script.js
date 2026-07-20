@@ -4,7 +4,6 @@
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
-
 const strengthBar = document.querySelector('.strength-bar');
 const strengthText = document.querySelector('.strength-text');
 
@@ -32,14 +31,40 @@ function setSuccess(input) {
 // ===============================
 function validateEmail() {
   const value = email.value.trim();
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Stronger real-world email pattern
+  const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   if (!regex.test(value)) {
-    setError(email, 'Please enter a valid email.');
-  } else {
-    setSuccess(email);
+    setError(email, 'Please enter a valid email address.');
+    return;
   }
+
+  // Reject obviously fake domains
+  const fakeDomains = ['test.com', 'example.com', 'fake.com', 'email.com'];
+  const domain = value.split('@')[1].toLowerCase();
+
+  if (fakeDomains.includes(domain)) {
+    setError(email, 'Please use a real email domain.');
+    return;
+  }
+
+  if (value.length < 6) {
+  setError(email, 'Email is too short to be valid.');
+    return;
+  }
+
+  const allowedTLDs = ['com', 'net', 'org', 'edu', 'gov', 'mil', 'io'];
+  const tld = domain.split('.').pop();
+
+  if (!allowedTLDs.includes(tld)) {
+  setError(email, 'Please use a common email domain.');
+    return;
+  }
+
+  setSuccess(email);
 }
+
 
 function validatePassword() {
   const value = password.value.trim();
@@ -97,7 +122,7 @@ function updateStrengthMeter() {
 }
 
 // ===============================
-// Event Listeners
+// Event Listeners - Live Validation
 // ===============================
 email.addEventListener('input', validateEmail);
 password.addEventListener('input', () => {
